@@ -1,0 +1,43 @@
+#include<iostream>
+using namespace std;
+#define r 3 
+
+int main()
+{
+	int i, j, tem;
+   	int m1[r][r] = { {1, 2, 3}, 
+                     {4, 5, 6}, 
+                     {7, 8, 9}
+					}; 
+    cout<<"\n The matrix is : \n";
+    for(i=0;i<r;i++) 
+	{
+    	for(j=0;j<r;j++) 
+		{
+            cout<<m1[i][j]<<"  ";
+        }
+        cout<<endl;
+    }
+    for(i= 0;i<r/2;i++) // for transform
+	{
+		for(j=i;j<(r-i-1);j++) 
+		{
+            tem = m1[i][j];
+            m1[i][j] = m1[r-1-j][i];
+            m1[r-1-j][i] = m1[r-1-i][r-1-j];
+            m1[r-1-i][r-1-j] = m1[j][r-1-i];
+            m1[j][r-1-i] = tem;
+        }
+    }
+    
+    cout<<"\n Resultat matrix is \n"; 
+    for(i=0;i<r;i++) 
+    { 
+        for(j=0;j<r;j++) 
+		{
+            cout<<m1[i][j]<<"  ";
+        }
+        cout<<endl;
+    }
+	return 0;
+}
