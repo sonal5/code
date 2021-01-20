@@ -1,0 +1,160 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+
+// Driver as well as Ministers are person so all have one common attribute i.e Name
+class person
+{
+	public: 
+	string name;
+	person(string name)
+	{
+		name = name;
+	}
+	/*int get_value()
+	{
+		return name;
+	}*/
+};
+
+
+class consti //constituency class
+{
+    public:
+    	string name;
+    	double area;
+    consti(string n, double ar)
+    {
+        this->name = n;
+        this->area = ar;
+    }
+    //to display the constituency detail
+	void display()
+	{
+		cout<<"\n constituency is: "<<name
+		<<" and area is: "<<area;
+	}
+};
+
+class mp : public person // MP class
+{
+	public:
+	 consti co;
+	 int spend_limit;
+	 mp(consti co)
+	 {
+	 	co = co;
+	 	spend_limit = 50000;
+	 }
+	 consti get_consti()
+	 {
+	 	return co;
+	 }
+	 int show_spendlimit()
+	 {
+	 	return spend_limit;
+	 }
+	 void show_details()
+	 {
+	 	cout<<"\n Minister name is: "<<name<<" \n spending limit is: "
+		 <<spend_limit<<"\n constituency is: "<<co;
+	 }
+};
+
+class car //car class
+{
+	public:
+		string name;
+		car(string n1)
+		{
+			name = n1;
+		}
+		int get_car()
+		{
+			return name;
+		}
+		void car_show()
+		{
+			cout<<"\n car name is: "<<name;
+		}
+}
+
+class cardriver : public person // driver 
+{
+	public: 
+	void cardriver_detail()
+	{
+		cout<<"\n driver name is: "<<name;
+	}
+}
+
+class minister : public mp // minister is an MP with car and driver
+{
+	public:
+	 car ca;
+	 cardriver driver;
+	 minister(car ca,cardriver driver)
+	 {
+	 	ca = ca;
+	 	spend_limit = 70000;
+	 	driver = driver;
+	 }
+	 car get_carvalue()
+	 {
+	 	return ca;
+	 }
+	 cardriver get_driver()
+	 {
+	 	return driver;
+	 }
+	 void show_details()
+	 {
+	 	cout<<"\n Minister name is: "<<name
+		 <<", spending limit is: "<<spend_limit
+		 <<", car name is: "<<ca<<", driver is: "<<driver
+		 <<", constituency is: "<<co;
+	 }
+};
+
+class pm : public minister // pm is a minister with atmost 5 cars
+{
+	public:
+	int num_of_car;
+	car c[];
+	pm(int n,car c[0],)
+	{
+	 	num_of_car = n;
+	 	c = car[n];
+	 	for(int i=0;i<n;i++)
+	 		c[i] = c[i];
+	 	spend_limit = 170000;
+	 }
+	 void show_details()
+	 {
+	 	cout<<"\n pm name is: "<<name
+		 <<", spending limit is: "<<spend_limit
+		 <<", car name is: "<<ca
+		 <<", constituency is: "<<co;
+		 for(i=0;i<num_of_car;i++)
+		 cout<<c[i]<<"\n ";
+	 }
+};
+
+int main()
+{
+	consti c1("Delhi",5000);
+	consti c2("Gujrat",6000);
+	consti c3("Rajasthan",9000);
+	cardriver d1("Ram");
+	cardriver d2("Roy");
+	cardriver d3("Roy");
+	car car1("Marui");
+	car car2("benz");
+	car car3("Wagon");
+		
+	minister xyz("may",c2,car3,d2);
+	xyz.show_details();
+		
+	pm mod("modi",c1,2,car[]{car1,car2},d1);
+	mod.show_details();	
+}
